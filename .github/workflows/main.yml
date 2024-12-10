@@ -1,0 +1,19 @@
+name: CI/CD Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call_workflow_build:
+    name: Java Build
+    uses: devsecops-lab-ciandt/devsecops-workflows/.github/workflows/build-java.yml@main
+
+  call_workflow_test:
+    name: Java Test
+    needs: call_workflow_build
+    uses: devsecops-lab-ciandt/devsecops-workflows/.github/workflows/test-java.yml@main
+
+  call_workflow_deploy:
+    name: Java Deploy
+    needs: call_workflow_test
+    uses: devsecops-lab-ciandt/devsecops-workflows/.github/workflows/deploy-java.yml@main
